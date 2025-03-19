@@ -1,0 +1,42 @@
+package com.hogwartss.school.h.service;
+
+import com.hogwartss.school.h.model.Student;
+import com.hogwartss.school.h.repository.StudentRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.Collection;
+
+@Service
+public class StudentService {
+    private final StudentRepository studentRepository;
+
+    @Autowired
+    public StudentService(StudentRepository studentRepository) {
+        this.studentRepository = studentRepository;
+    }
+
+    public Student createStudent(Student student) {
+        return studentRepository.save(student);
+    }
+
+    public Student findStudent(long id) {
+        return studentRepository.findById(id).get();
+    }
+
+    public Student editStudent(Student student) {
+        return studentRepository.save(student);
+    }
+
+    public void deleteStudent(long id) {
+        studentRepository.deleteById(id);
+    }
+
+    public Collection<Student> getAllStudent() {
+        return studentRepository.findAll();
+    }
+
+    public Collection<Student> getStudentByAge(int age) {
+        return studentRepository.getStudentByAge(age);
+    }
+}
