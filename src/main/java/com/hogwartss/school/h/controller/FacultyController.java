@@ -13,7 +13,7 @@ import java.util.Collection;
 @RequestMapping("faculty")
 public class FacultyController {
 
-    private final FacultyService facultyService;
+    private final FacultyService  facultyService;
     @Autowired
     public FacultyController(FacultyService facultyService) {
         this.facultyService = facultyService;
