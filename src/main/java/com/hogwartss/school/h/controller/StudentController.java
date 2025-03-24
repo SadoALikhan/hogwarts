@@ -3,6 +3,7 @@ package com.hogwartss.school.h.controller;
 
 import com.hogwartss.school.h.model.Student;
 import com.hogwartss.school.h.service.StudentService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,8 +28,10 @@ public class StudentController {
         return ResponseEntity.ok(student);
     }
     @PostMapping
-    public Student createStudent(@RequestBody Student student) {
-        return studentService.createStudent(student);
+    @Transactional
+    public ResponseEntity<Student> createStudent(@RequestBody Student student) {
+        Student savedStudent = studentService.createStudent(student);
+        return ResponseEntity.ok(savedStudent);
     }
     @PutMapping
     public ResponseEntity<Student> editStudent(@RequestBody Student student) {
@@ -52,5 +55,11 @@ public class StudentController {
     @GetMapping("/filter/{age}")
     public ResponseEntity<Collection<Student>> filteredByAge(@PathVariable int age) {
         return ResponseEntity.ok(studentService.getStudentByAge(age));
+    }
+
+    @GetMapping(("/filter/between"))
+    public ResponseEntity<Collection<Student>> findStudentBetweenAge(@RequestParam int minAge,
+                                                                     @RequestParam int maxAge) {
+        return ResponseEntity.ok(studentService.findStudentBetweenAge(minAge, maxAge));
     }
 }
