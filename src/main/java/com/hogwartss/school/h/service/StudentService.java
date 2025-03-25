@@ -11,7 +11,6 @@ import java.util.Collection;
 public class StudentService {
     private final StudentRepository studentRepository;
 
-    @Autowired
     public StudentService(StudentRepository studentRepository) {
         this.studentRepository = studentRepository;
     }
@@ -20,15 +19,15 @@ public class StudentService {
         return studentRepository.save(student);
     }
 
-    public Student findStudent(long id) {
-        return studentRepository.findById(id).get();
+    public Student findStudent(Long id) {
+        return studentRepository.findById(id).orElse(null);
     }
 
     public Student editStudent(Student student) {
         return studentRepository.save(student);
     }
 
-    public void deleteStudent(long id) {
+    public void deleteStudent(Long id) {
         studentRepository.deleteById(id);
     }
 
@@ -43,4 +42,5 @@ public class StudentService {
     public Collection<Student> findStudentBetweenAge(int minAge, int maxAge) {
         return studentRepository.findByAgeBetween(minAge, maxAge);
     }
+
 }

@@ -2,9 +2,9 @@ package com.hogwartss.school.h.controller;
 
 
 import com.hogwartss.school.h.model.Faculty;
+import com.hogwartss.school.h.model.Student;
 import com.hogwartss.school.h.service.FacultyService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,11 +28,9 @@ public class FacultyController {
         return ResponseEntity.ok(faculty);
     }
     @PostMapping
-    public ResponseEntity<Faculty> createFaculty(@RequestBody Faculty faculty) {
-        Faculty createdFaculty = facultyService.createFaculty(faculty);
-        return ResponseEntity.ok(createdFaculty);
+    public Faculty createFaculty(@RequestBody Faculty faculty) {
+        return facultyService.createFaculty(faculty);
     }
-
     @PutMapping
     public ResponseEntity<Faculty> editFaculty(@RequestBody Faculty faculty) {
         Faculty foundFaculty = facultyService.editFaculty(faculty);
@@ -58,4 +56,14 @@ public class FacultyController {
                                                              @RequestParam(required = false) String color) {
         return ResponseEntity.ok(facultyService.getFacultyByNameOrColor(name, color));
     }
+
+    @GetMapping("/faculty/{facultyId}")
+    public ResponseEntity<Collection<Student>> getStudentsByFaculty(@PathVariable Long facultyId) {
+        Collection<Student> students = facultyService.findStudentByFacultyId(facultyId);
+        if (students.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(students);
+    }
+
 }
