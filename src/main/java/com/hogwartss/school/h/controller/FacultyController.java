@@ -4,6 +4,7 @@ package com.hogwartss.school.h.controller;
 import com.hogwartss.school.h.model.Faculty;
 import com.hogwartss.school.h.service.FacultyService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,9 +28,11 @@ public class FacultyController {
         return ResponseEntity.ok(faculty);
     }
     @PostMapping
-    public Faculty createFaculty(@RequestBody Faculty faculty) {
-        return facultyService.createFaculty(faculty);
+    public ResponseEntity<Faculty> createFaculty(@RequestBody Faculty faculty) {
+        Faculty createdFaculty = facultyService.createFaculty(faculty);
+        return ResponseEntity.ok(createdFaculty);
     }
+
     @PutMapping
     public ResponseEntity<Faculty> editFaculty(@RequestBody Faculty faculty) {
         Faculty foundFaculty = facultyService.editFaculty(faculty);
