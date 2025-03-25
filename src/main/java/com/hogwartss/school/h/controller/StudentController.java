@@ -28,7 +28,6 @@ public class StudentController {
         return ResponseEntity.ok(student);
     }
     @PostMapping
-    @Transactional
     public ResponseEntity<Student> createStudent(@RequestBody Student student) {
         Student savedStudent = studentService.createStudent(student);
         return ResponseEntity.ok(savedStudent);

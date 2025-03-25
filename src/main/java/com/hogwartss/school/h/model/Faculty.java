@@ -8,29 +8,28 @@ import java.util.Objects;
 @Entity
 public class Faculty {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    private int id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     private String name;
     private String color;
 
-    @OneToMany(mappedBy = "faculty")
-    private Collection<Student> students;
+//    @OneToMany(mappedBy = "faculty")
+//    private Collection<Student> students;
 
     public Faculty() {
     }
 
-    public Faculty(int id, String name, String color) {
+    public Faculty(Long id, String name, String color) {
         this.id = id;
         this.name = name;
         this.color = color;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
