@@ -40,8 +40,4 @@ public class FacultyService {
         return facultyRepository.findAll();
     }
 
-    public Collection<Student> findStudentByFacultyId(Long facultyId) {
-        return facultyRepository.findStudentByFacultyId(facultyId);
-    }
-
 }
