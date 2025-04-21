@@ -9,7 +9,7 @@ public class Avatar {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String filePath;
-    private String fileSize;
+    private Long fileSize;
     private String mediaType;
 
     @Lob
@@ -40,11 +40,11 @@ public class Avatar {
         this.filePath = filePath;
     }
 
-    public String getFileSize() {
+    public Long getFileSize() {
         return fileSize;
     }
 
-    public void setFileSize(String fileSize) {
+    public void setFileSize(Long fileSize) {
         this.fileSize = fileSize;
     }
 

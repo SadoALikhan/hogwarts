@@ -26,7 +26,7 @@ public class AvatarController {
         this.avatarService = avatarServiceImpl;
     }
 
-    @PostMapping(value = "/{id}/avatar", consumes = MediaType.MULTIPART_FROM_DATA_VALUE)
+    @PostMapping(value = "/{id}/avatar", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<String> uploadAvatar(@PathVariable Long id, @RequestParam MultipartFile avatar) throws IOException {
 
         avatarService.uploadAvatar(id, avatar);
@@ -57,7 +57,7 @@ public class AvatarController {
         OutputStream os = response.getOutputStream()) {
             response.setStatus(200);
             response.setContentType(avatar.getMediaType());
-            response.setContentLength((int) avatar.getFileSize());
+            response.setContentLength(avatar.getFileSize().intValue());
             is.transferTo(os);
         }
     }
